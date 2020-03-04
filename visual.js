@@ -214,7 +214,7 @@ function draw(data) {
   var dateLabel_y = config.dateLabel_y;
   //dateLabel位置
   if (dateLabel_x == null || dateLabel_y == null) {
-    dateLabel_x = innerWidth; //默认
+    dateLabel_x = innerWidth+40; //默认
     dateLabel_y = innerHeight; //默认
   } //是否隐藏
   if (dateLabel_switch == false) {
@@ -345,12 +345,14 @@ function draw(data) {
       .text(itemLabel);
 
     // 右1文字
-    g.insert("text")
+   if(config.show_right_event){
+      g.insert("text")
       .attr("class", "growth")
       .attr("id", "event_news")
       .attr("x", text_x)
       .attr("y", text_y)
       .text(typeLabel);
+   }
 
     // 榜首日期计数
     if (use_counter == true) {

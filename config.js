@@ -57,6 +57,9 @@
   // left label
   itemLabel: "海外累计",
 
+  //显示头部右边表格event
+  show_right_event:false,
+
   // right label
   typeLabel: "",
 
