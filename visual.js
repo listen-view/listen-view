@@ -9,23 +9,38 @@
 // import * as d3 from 'd3';
 // require("./stylesheet.css");
 
-$("#inputfile").change(function () {
+window.onload=function(){
   var svg = document.getElementsByTagName('svg')[0]
   svg.setAttribute('width', window.screen.availWidth*1.25)
   svg.setAttribute('height', 500)
   $("#inputfile").attr("hidden", true);
-  var r = new FileReader();
-  r.readAsText(this.files[0], config.encoding);
-  r.onload = function () {
-    //读取完成后，数据保存在对象的result属性中
-    var data = d3.csvParse(this.result);
-    try {
-      draw(data);
-    } catch (error) {
-      alert(error);
+  $.ajax({
+    url:'https://listen-view.github.io/listen-view/卫健委(4).csv',
+    type:'GET',
+    success:function(res){
+      try {
+        draw(d3.csvParse(res));
+      } catch (error) {
+        alert(error);
+      }
     }
-  };
-});
+  })
+}
+// $("#inputfile").change(function () {
+
+//   var r = new FileReader();
+//   console.log(this.files[0])
+//   r.readAsText(this.files[0], config.encoding);
+//   r.onload = function () {
+//     //读取完成后，数据保存在对象的result属性中
+//     var data = d3.csvParse(this.result);
+//     try {
+//       draw(data);
+//     } catch (error) {
+//       alert(error);
+//     }
+//   };
+// });
 
 function draw(data) {
   var date = [];
