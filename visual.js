@@ -9,41 +9,41 @@
 // import * as d3 from 'd3';
 // require("./stylesheet.css");
 
-window.onload=function(){
-  var svg = document.getElementsByTagName('svg')[0]
-  svg.setAttribute('width', window.screen.availWidth*1.25)
-  svg.setAttribute('height', 500)
-  $("#inputfile").attr("hidden", true);
-  $.ajax({
-    url:'https://listen-view.github.io/listen-view/卫健委(4).csv',
-    type:'GET',
-    success:function(res){
-      try {
-        draw(d3.csvParse(res));
-      } catch (error) {
-        alert(error);
-      }
-    }
-  })
-}
-// $("#inputfile").change(function () {
+// window.onload=function(){
 //   var svg = document.getElementsByTagName('svg')[0]
 //   svg.setAttribute('width', window.screen.availWidth*1.25)
 //   svg.setAttribute('height', 500)
 //   $("#inputfile").attr("hidden", true);
-//   var r = new FileReader();
-//   console.log(this.files[0])
-//   r.readAsText(this.files[0], config.encoding);
-//   r.onload = function () {
-//     //读取完成后，数据保存在对象的result属性中
-//     var data = d3.csvParse(this.result);
-//     try {
-//       draw(data);
-//     } catch (error) {
-//       alert(error);
+//   $.ajax({
+//     url:'https://listen-view.github.io/listen-view/卫健委(4).csv',
+//     type:'GET',
+//     success:function(res){
+//       try {
+//         draw(d3.csvParse(res));
+//       } catch (error) {
+//         alert(error);
+//       }
 //     }
-//   };
-// });
+//   })
+// }
+$("#inputfile").change(function () {
+  var svg = document.getElementsByTagName('svg')[0]
+  svg.setAttribute('width', window.screen.availWidth*1.25)
+  svg.setAttribute('height', 500)
+  $("#inputfile").attr("hidden", true);
+  var r = new FileReader();
+  console.log(this.files[0])
+  r.readAsText(this.files[0], config.encoding);
+  r.onload = function () {
+    //读取完成后，数据保存在对象的result属性中
+    var data = d3.csvParse(this.result);
+    try {
+      draw(data);
+    } catch (error) {
+      alert(error);
+    }
+  };
+});
 
 function draw(data) {
   var date = [];
@@ -597,7 +597,7 @@ function draw(data) {
     .delay(500 * interval_time)
     .duration(2490 * interval_time)
     .text(function(d) {
-      if (use_type_info) {
+      if (use_type_info&&d[divide_by]) {
         return d[divide_by] + "-" + d.name;
       }
       return d.name;
@@ -725,7 +725,7 @@ function draw(data) {
     var barInfo = barUpdate
       .select(".barInfo")
       .text(function(d) {
-        if (use_type_info) {
+        if (use_type_info&&d[divide_by]) {
           return d[divide_by] + "-" + d.name;
         }
         return d.name;
