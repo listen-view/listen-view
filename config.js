@@ -110,15 +110,15 @@
   // 图表左右上下间距。
   // 注意，left_margin不包括左侧的label，修改数值较小会导致左侧label不显示
   left_margin: 35,
-  right_margin: 150,
+  right_margin: 165,
   top_margin: 130,
   bottom_margin: 0,
 
   // 是否开启时间标签。
   dateLabel_switch: true,
   // 时间标签坐标。建议x：1000 y：-50开始尝试，默认位置为x:null,y:null
-  dateLabel_x: 1200,
-  dateLabel_y: 650,
+  dateLabel_x: null,
+  dateLabel_y: null,
 
   // 允许大于平均值的条消失时上浮。
   allow_up: false,
