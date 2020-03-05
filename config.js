@@ -58,7 +58,7 @@
   itemLabel: "海外累计",
 
   //显示头部右边表格event
-  show_right_event:false,
+  show_right_event: false,
 
   // right label
   typeLabel: "",
@@ -69,7 +69,7 @@
   item_x: 300,
 
   // 时间点间隔时间。
-  interval_time: 1.0,
+  interval_time: 2.0,
 
   // 上方文字水平高度。
   text_y: -50,
