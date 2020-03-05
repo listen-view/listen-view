@@ -9,41 +9,41 @@
 // import * as d3 from 'd3';
 // require("./stylesheet.css");
 
-window.onload=function(){
-  var svg = document.getElementsByTagName('svg')[0]
-  svg.setAttribute('width', window.screen.availWidth*1.25)
-  svg.setAttribute('height', 500)
-  $("#inputfile").attr("hidden", true);
-  $.ajax({
-    url:'https://listen-view.github.io/listen-view/卫健委(4).csv',
-    type:'GET',
-    success:function(res){
-      try {
-        draw(d3.csvParse(res));
-      } catch (error) {
-        alert(error);
-      }
-    }
-  })
-}
-// $("#inputfile").change(function () {
+// window.onload=function(){
 //   var svg = document.getElementsByTagName('svg')[0]
 //   svg.setAttribute('width', window.screen.availWidth*1.25)
 //   svg.setAttribute('height', 500)
 //   $("#inputfile").attr("hidden", true);
-//   var r = new FileReader();
-//   console.log(this.files[0])
-//   r.readAsText(this.files[0], config.encoding);
-//   r.onload = function () {
-//     //读取完成后，数据保存在对象的result属性中
-//     var data = d3.csvParse(this.result);
-//     try {
-//       draw(data);
-//     } catch (error) {
-//       alert(error);
+//   $.ajax({
+//     url:'https://listen-view.github.io/listen-view/卫健委(4).csv',
+//     type:'GET',
+//     success:function(res){
+//       try {
+//         draw(d3.csvParse(res));
+//       } catch (error) {
+//         alert(error);
+//       }
 //     }
-//   };
-// });
+//   })
+// }
+$("#inputfile").change(function () {
+  var svg = document.getElementsByTagName('svg')[0]
+  svg.setAttribute('width', window.screen.availWidth * 1.25)
+  svg.setAttribute('height', 500)
+  $("#inputfile").attr("hidden", true);
+  var r = new FileReader();
+  console.log(this.files[0])
+  r.readAsText(this.files[0], config.encoding);
+  r.onload = function () {
+    //读取完成后，数据保存在对象的result属性中
+    var data = d3.csvParse(this.result);
+    try {
+      draw(data);
+    } catch (error) {
+      alert(error);
+    }
+  };
+});
 
 function draw(data) {
   var date = [];
@@ -214,7 +214,7 @@ function draw(data) {
   var dateLabel_y = config.dateLabel_y;
   //dateLabel位置
   if (dateLabel_x == null || dateLabel_y == null) {
-    dateLabel_x = innerWidth+40; //默认
+    dateLabel_x = innerWidth + 40; //默认
     dateLabel_y = innerHeight; //默认
   } //是否隐藏
   if (dateLabel_switch == false) {
@@ -345,14 +345,14 @@ function draw(data) {
       .text(itemLabel);
 
     // 右1文字
-   if(config.show_right_event){
+    if (config.show_right_event) {
       g.insert("text")
-      .attr("class", "growth")
-      .attr("id", "event_news")
-      .attr("x", text_x)
-      .attr("y", text_y)
-      .text(typeLabel);
-   }
+        .attr("class", "growth")
+        .attr("id", "event_news")
+        .attr("x", text_x)
+        .attr("y", text_y)
+        .text(typeLabel);
+    }
 
     // 榜首日期计数
     if (use_counter == true) {
@@ -545,7 +545,7 @@ function draw(data) {
       .transition("a")
       .delay(500 * interval_time)
       .duration(2490 * interval_time)
-      .attr("y", 0)
+      .attr("y", 5)
       .attr("width", d => xScale(xValue(d)))
       .attr("fill-opacity", 1);
 
@@ -579,62 +579,62 @@ function draw(data) {
 
     // bar上文字
     var barInfo = barEnter
-    .append("text")
-    .attr("x", function(d) {
-      if (long) return 10;
-      if (enter_from_0) {
-        return 0;
-      } else {
-        return xScale(currentData[currentData.length - 1].value);
-      }
-    })
-    .attr("stroke", d => getColor(d))
-    .attr("class", function() {
-      return "barInfo";
-    })
-    .attr("y", 50)
-    .attr("stroke-width", "0px")
-    .attr("fill-opacity", 0)
-    .transition()
-    .delay(500 * interval_time)
-    .duration(2490 * interval_time)
-    .text(function(d) {
-      if (use_type_info&&d[divide_by]) {
-        return d[divide_by] + "-" + d.name;
-      }
-      return d.name;
-    })
-    .attr("x", d => {
-      if (long) return 10;
-      return xScale(xValue(d)) - 40;
-    })
-    .attr("fill-opacity", function(d) {
-      if (xScale(xValue(d)) - 40 < display_barInfo) {
-        return 0;
-      }
-      return 1;
-    })
-    .attr("y", 2)
-    .attr("dy", ".5em")
-    .attr("text-anchor", function() {
-      if (long) return "start";
-      return "end";
-    })
-    .attr("stroke-width", function(d) {
-      if (xScale(xValue(d)) - 40 < display_barInfo) {
-        return "0px";
-      }
-      return "4px";
-    })
-    .attr("paint-order", "stroke");
+      .append("text")
+      .attr("x", function (d) {
+        if (long) return 10;
+        if (enter_from_0) {
+          return 0;
+        } else {
+          return xScale(currentData[currentData.length - 1].value);
+        }
+      })
+      .attr("stroke", d => getColor(d))
+      .attr("class", function () {
+        return "barInfo";
+      })
+      .attr("y", 50)
+      .attr("stroke-width", "0px")
+      .attr("fill-opacity", 0)
+      .transition()
+      .delay(500 * interval_time)
+      .duration(2490 * interval_time)
+      .text(function (d) {
+        if (use_type_info && d[divide_by]) {
+          return d[divide_by] + "-" + d.name;
+        }
+        return d.name;
+      })
+      .attr("x", d => {
+        if (long) return 10;
+        return xScale(xValue(d)) - 40;
+      })
+      .attr("fill-opacity", function (d) {
+        if (xScale(xValue(d)) - 40 < display_barInfo) {
+          return 0;
+        }
+        return 1;
+      })
+      .attr("y", 10)
+      .attr("dy", ".5em")
+      .attr("text-anchor", function () {
+        if (long) return "start";
+        return "end";
+      })
+      .attr("stroke-width", function (d) {
+        if (xScale(xValue(d)) - 40 < display_barInfo) {
+          return "0px";
+        }
+        return "4px";
+      })
+      .attr("paint-order", "stroke");
     if (long) {
-      barInfo.tween("text", function(d) {
+      barInfo.tween("text", function (d) {
         var self = this;
         self.textContent = d.value;
         var i = d3.interpolate(self.textContent, Number(d.value)),
           prec = (Number(d.value) + "").split("."),
           round = prec.length > 1 ? Math.pow(10, prec[1].length) : 1;
-        return function(t) {
+        return function (t) {
           self.textContent =
             d[divide_by] +
             "-" +
@@ -647,7 +647,7 @@ function draw(data) {
     if (!long) {
       barEnter
         .append("text")
-        .attr("x", function() {
+        .attr("x", function () {
           if (long) {
             return 10;
           }
@@ -662,7 +662,7 @@ function draw(data) {
         .style("fill", d => getColor(d))
         .transition()
         .duration(2990 * interval_time)
-        .tween("text", function(d) {
+        .tween("text", function (d) {
           var self = this;
           // 初始值为d.value的0.9倍
           self.textContent = d.value * 0.9;
@@ -670,7 +670,7 @@ function draw(data) {
             prec = (Number(d.value) + "").split("."),
             round = prec.length > 1 ? Math.pow(10, prec[1].length) : 1;
           // d.value = self.textContent
-          return function(t) {
+          return function (t) {
             self.textContent =
               d3.format(format)(Math.round(i(t) * round) / round) +
               config.postfix;
@@ -679,13 +679,13 @@ function draw(data) {
         })
         .attr("fill-opacity", 1)
         .attr("y", 0)
-        .attr("class", function(d) {
+        .attr("class", function (d) {
           return "value";
         })
         .attr("x", d => {
           return xScale(xValue(d)) + 10;
         })
-        .attr("y", 22);
+        .attr("y", 18);
     }
     var barUpdate = bar
       .transition("2")
@@ -726,8 +726,8 @@ function draw(data) {
 
     var barInfo = barUpdate
       .select(".barInfo")
-      .text(function(d) {
-        if (use_type_info&&d[divide_by]) {
+      .text(function (d) {
+        if (use_type_info && d[divide_by]) {
           return d[divide_by] + "-" + d.name;
         }
         return d.name;
@@ -736,13 +736,13 @@ function draw(data) {
         if (long) return 10;
         return xScale(xValue(d)) - 40;
       })
-      .attr("fill-opacity", function(d) {
+      .attr("fill-opacity", function (d) {
         if (xScale(xValue(d)) - 40 < display_barInfo) {
           return 0;
         }
         return 1;
       })
-      .attr("stroke-width", function(d) {
+      .attr("stroke-width", function (d) {
         if (xScale(xValue(d)) - 40 < display_barInfo) {
           return "0px";
         }

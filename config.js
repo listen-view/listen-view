@@ -69,7 +69,7 @@
   item_x: 300,
 
   // 时间点间隔时间。
-  interval_time: 2.0,
+  interval_time: 1.5,
 
   // 上方文字水平高度。
   text_y: -50,
